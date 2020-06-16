@@ -17,8 +17,8 @@
   - name: Configure trunk interfaces with vlans {{ vlan_list }}
     vars:
       vlan_list: "1010,1011,1012"
-    include_role: ios-l2-trunk-if
-      name: 
+    include_role: 
+      name: ios-l2-trunk-if
     with_items:
     - interface Po1
     
