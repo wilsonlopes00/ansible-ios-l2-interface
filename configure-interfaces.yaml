@@ -1,0 +1,15 @@
+---
+- hosts: tor-switches
+  gather_facts: false
+  connection: local
+
+  tasks:
+  - name: Configure access interfaces on vlan {{ vlan_id }}
+    vars:
+      vlan_id: 1010
+    include_role:
+      name: ios-l2-access-if
+    with_items:
+    - interface GigabitEthernet1/0/1
+    - interface GigabitEthernet1/0/2
+    - interface GigabitEthernet1/0/3
