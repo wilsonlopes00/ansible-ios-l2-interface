@@ -4,7 +4,7 @@
   connection: local
 
   tasks:
-  - name: Configure access interfaces on vlan {{ vlan_id }}
+  - name: Configure access interfaces with vlan {{ vlan_id }}
     vars:
       vlan_id: 1010
     include_role:
@@ -13,3 +13,14 @@
     - interface GigabitEthernet1/0/1
     - interface GigabitEthernet1/0/2
     - interface GigabitEthernet1/0/3
+
+  - name: Configure trunk interfaces with vlans {{ vlan_list }}
+    vars:
+      vlan_list: "1010,1011,1012"
+    include_role: ios-l2-trunk-if
+      name: 
+    with_items:
+    - interface Po1
+    
+
+
