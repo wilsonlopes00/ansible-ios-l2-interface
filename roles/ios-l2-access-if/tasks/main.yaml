@@ -1,0 +1,17 @@
+- name: Configure {{ item }}
+  ios_config:
+    lines:
+      - switchport mode access
+      - switchport access vlan {{ vlan_id }}
+      - spanning-tree portfast
+      - no shutdown
+    parents: "{{ item }}"
+    save_when: always
+
+- name: show {{ item }}
+  ios_command:
+    commands: show running {{ item }}
+  register: output
+
+- debug:
+    var=output.stdout_lines
