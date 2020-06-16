@@ -1,0 +1,16 @@
+- name: Configure {{ item }}
+  ios_config:
+    lines:
+      - switchport mode trunk
+      - switchport trunk allowed vlan {{ vlan_list }}
+      - no shutdown
+    parents: "{{ item }}"
+    save_when: always
+
+- name: show {{ item }}
+  ios_command:
+    commands: show running {{ item }}
+  register: output
+
+- debug:
+    var=output.stdout_lines
